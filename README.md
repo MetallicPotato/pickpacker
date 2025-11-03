@@ -3,9 +3,10 @@
 </p>
 
 <h1 align="center">PickPacker</h1>
+A simple channel packing tool. 
 
 ## About
-A simple channel packing tool. I've run across channel packing utilities before, but never found one that would let me choose the channels of my imported textures, allowing me to repack stuff that's already been packed! Useful if you have to repack purchased asset textures for a custom material setup. Enjoy!
+I've run across channel packing utilities before, but never found one that would let me choose the channels to use of my imported textures, allowing me to repack stuff that's already been packed! It'll be useful if you have to repack purchased asset textures for a custom material setup. I hope you find some use for it!
 
 ## Version
 Built on Godot 4.5.1
