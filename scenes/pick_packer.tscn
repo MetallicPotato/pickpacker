@@ -109,6 +109,7 @@ alignment = 0
 expand_icon = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
+oversampling_override = 1.0
 access = 2
 filters = PackedStringArray("*.png")
 use_native_dialog = true
