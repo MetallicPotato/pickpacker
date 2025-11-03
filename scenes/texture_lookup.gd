@@ -1,8 +1,8 @@
 class_name TextureLookup
 extends Control
 
-signal image_changed(update: bool)
-signal image_size_changed(width: int, height: int)
+signal image_changed(channel: channelselect)
+signal image_channel_change(image: channelselect, channel: int)
 
 enum channelselect {RED,GREEN,BLUE,ALPHA}
 
@@ -44,24 +44,21 @@ func _on_channel_select_item_selected(index: int) -> void:
 		0:
 			channeltouse = 0
 			texture_rect.set_instance_shader_parameter("mode", 1)
-			image_changed.emit(false)
+			image_channel_change.emit(Channel, channeltouse)
 		1:
 			channeltouse = 1
 			texture_rect.set_instance_shader_parameter("mode", 2)
-			image_changed.emit(false)
+			image_channel_change.emit(Channel, channeltouse)
 		2:
 			channeltouse = 2
 			texture_rect.set_instance_shader_parameter("mode", 3)
-			image_changed.emit(false)
+			image_channel_change.emit(Channel, channeltouse)
 		3:
 			channeltouse = 3
 			texture_rect.set_instance_shader_parameter("mode", 4)
-			image_changed.emit(false)
+			image_channel_change.emit(Channel, channeltouse)
 
 func load_image(path: String) -> void:
 	var image = Image.load_from_file(path)
 	texture_rect.texture = ImageTexture.create_from_image(image)
-	image_size_changed.emit(image.get_width(), image.get_height())
-	#TODO: both these signal being called at the same time feels silly.
-	#Is there a better way to handle image size?
-	image_changed.emit(true)
+	image_changed.emit(Channel)

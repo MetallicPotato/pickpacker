@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmj6ikkeeuxel"]
+
+[ext_resource type="Texture2D" uid="uid://drd6sw8gcttr1" path="res://assets/exclamation.png" id="1_ixt6l"]
+[ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="2_5tf27"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgmao"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.71106166, 0, 0.19414979, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+expand_margin_right = 8.0
+
+[node name="SizeErrorMessage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgmao")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ixt6l")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5tf27")
+text = "Several textures have different sizes!
+This can lead to unwanted results.
+Use with Caution."

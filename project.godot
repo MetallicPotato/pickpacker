@@ -20,3 +20,38 @@ config/icon="res://icon.svg"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[shader_globals]
+
+redtexture={
+"type": "sampler2D",
+"value": "res://assets/whitecolor.png"
+}
+greentexture={
+"type": "sampler2D",
+"value": "res://assets/whitecolor.png"
+}
+bluetexture={
+"type": "sampler2D",
+"value": "res://assets/whitecolor.png"
+}
+alphatexture={
+"type": "sampler2D",
+"value": "res://assets/whitecolor.png"
+}
+redmode={
+"type": "int",
+"value": 0
+}
+greenmode={
+"type": "int",
+"value": 0
+}
+bluemode={
+"type": "int",
+"value": 0
+}
+alphamode={
+"type": "int",
+"value": 0
+}

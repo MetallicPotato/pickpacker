@@ -4,9 +4,9 @@ extends Control
 @onready var blue: TextureLookup = $GridContainer/Blue
 @onready var green: TextureLookup = $GridContainer/Green
 @onready var alpha: TextureLookup = $GridContainer/Alpha
-@onready var final_texture: TextureRect = $VBoxContainer/FinalTexture
 @onready var file_dialog: FileDialog = $FileDialog
-
+@onready var size_error_message = $SizeErrorMessage
+@onready var sub_viewport = $VBoxContainer/SubViewportContainer/SubViewport
 
 var imagetex: ImageTexture
 var image: Image
@@ -25,51 +25,69 @@ func _ready() -> void:
 	green.image_changed.connect(changeimage)
 	alpha.image_changed.connect(changeimage)
 	
-	red.image_size_changed.connect(_change_image_size)
-	blue.image_size_changed.connect(_change_image_size)
-	green.image_size_changed.connect(_change_image_size)
-	alpha.image_size_changed.connect(_change_image_size)
+	red.image_channel_change.connect(_image_channel_changed)
+	blue.image_channel_change.connect(_image_channel_changed)
+	green.image_channel_change.connect(_image_channel_changed)
+	alpha.image_channel_change.connect(_image_channel_changed)
 	
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	
 	image = Image.new()
-	imagetex = ImageTexture.new()
 	image = Image.create_empty(1024,1024,false,Image.FORMAT_RGBA8)
-	imagetex = ImageTexture.create_from_image(image)
-	imagetex.set_image(image)
-	final_texture.texture = imagetex
-	changeimage(true)
 
 func _on_button_pressed() -> void:
 	file_dialog.show()
 
-func changeimage(updateimages: bool) -> void:
+func changeimage(channel: TextureLookup.channelselect) -> void:
+	#TODO: replace this logic with setting parameters for a shader!
 	var width = image.get_width()
 	var height = image.get_height()
+	#if updateimages:
+		#redimage = red.texture_rect.texture.get_image()
+		#if redimage.is_compressed():
+			#redimage.decompress()
+		#blueimage = blue.texture_rect.texture.get_image()
+		#if blueimage.is_compressed():
+			#blueimage.decompress()
+		#greenimage = green.texture_rect.texture.get_image()
+		#if greenimage.is_compressed():
+			#greenimage.decompress()
+		#alphaimage = alpha.texture_rect.texture.get_image()
+		#if alphaimage.is_compressed():
+			#alphaimage.decompress()
+	#
+	#for y in range(height):
+		#for x in range(width):
+			#var newcolor: Color
+			#newcolor.r = _get_pixel_of_channel(red.channeltouse, redimage, x, y)
+			#newcolor.g = _get_pixel_of_channel(green.channeltouse, greenimage, x, y)
+			#newcolor.b = _get_pixel_of_channel(blue.channeltouse, blueimage, x, y)
+			#newcolor.a = _get_pixel_of_channel(alpha.channeltouse, alphaimage, x, y)
+			#image.set_pixel(x,y,newcolor)
+	#imagetex.update(image)
 	
-	if updateimages:
-		redimage = red.texture_rect.texture.get_image()
-		if redimage.is_compressed():
-			redimage.decompress()
-		blueimage = blue.texture_rect.texture.get_image()
-		if blueimage.is_compressed():
-			blueimage.decompress()
-		greenimage = green.texture_rect.texture.get_image()
-		if greenimage.is_compressed():
-			greenimage.decompress()
-		alphaimage = alpha.texture_rect.texture.get_image()
-		if alphaimage.is_compressed():
-			alphaimage.decompress()
+	match channel:
+		TextureLookup.channelselect.RED:
+			RenderingServer.global_shader_parameter_set("redtexture", red.texture_rect.texture)
+		TextureLookup.channelselect.GREEN:
+			RenderingServer.global_shader_parameter_set("greentexture", green.texture_rect.texture)
+		TextureLookup.channelselect.BLUE:
+			RenderingServer.global_shader_parameter_set("bluetexture", blue.texture_rect.texture)
+		TextureLookup.channelselect.ALPHA:
+			RenderingServer.global_shader_parameter_set("alphatexture", alpha.texture_rect.texture)
 	
-	for y in range(height):
-		for x in range(width):
-			var newcolor: Color
-			newcolor.r = _get_pixel_of_channel(red.channeltouse, redimage, x, y)
-			newcolor.g = _get_pixel_of_channel(green.channeltouse, greenimage, x, y)
-			newcolor.b = _get_pixel_of_channel(blue.channeltouse, blueimage, x, y)
-			newcolor.a = _get_pixel_of_channel(alpha.channeltouse, alphaimage, x, y)
-			image.set_pixel(x,y,newcolor)
-	imagetex.update(image)
+	#Image Size
+	if image_size_set: 
+		if !image.get_height() == image_height or !image.get_width() == image_width:
+			size_error_message.show()
+		else:
+			size_error_message.hide()
+	else:
+		size_error_message.hide()
+		image_width = width
+		image_height = height
+		image.resize(width, height)
+		image_size_set = true
 
 func _get_pixel_of_channel(channel: int, img: Image, x: int, y: int) -> float:
 	match channel:
@@ -84,6 +102,7 @@ func _get_pixel_of_channel(channel: int, img: Image, x: int, y: int) -> float:
 	return img.get_pixel(x,y).r
 
 func _on_file_dialog_file_selected(path: String) -> void:
+	#TODO: turn shader into image here!
 	image.save_png(path)
 
 func _on_files_dropped(_files):
@@ -100,13 +119,16 @@ func _on_files_dropped(_files):
 		alpha.load_image(_files[0])
 		return
 
-func _change_image_size(width: int, height: int) -> void:
-	if image_size_set: return
-	
-	image_width = width
-	image_height = height
-	image.resize(width, height)
-	imagetex.set_image(image)
-	image_size_set = true
-	#TODO: make this whole app image size agnostic!
-	#TODO: handle images of differing sizes being opened.
+func _image_channel_changed(imagetouse: TextureLookup.channelselect, newchannel: int) -> void:
+	match imagetouse:
+		TextureLookup.channelselect.RED:
+			RenderingServer.global_shader_parameter_set("redmode", newchannel)
+		TextureLookup.channelselect.GREEN:
+			RenderingServer.global_shader_parameter_set("greenmode", newchannel)
+		TextureLookup.channelselect.BLUE:
+			RenderingServer.global_shader_parameter_set("bluemode", newchannel)
+		TextureLookup.channelselect.ALPHA:
+			RenderingServer.global_shader_parameter_set("alphamode", newchannel)
+
+func _on_reset_button_pressed():
+	pass

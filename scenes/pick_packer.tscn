@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bgw3g1xgsi416" path="res://scenes/pick_packer.gd" id="1_ch5a3"]
 [ext_resource type="PackedScene" uid="uid://dtyfu3dcxeuyk" path="res://scenes/texture_lookup.tscn" id="1_twk1d"]
-[ext_resource type="Texture2D" uid="uid://e45dwm1wysgy" path="res://assets/whitecolor.png" id="3_pf12n"]
 [ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="3_pfikn"]
-[ext_resource type="Shader" uid="uid://b1pdcx12g8ocv" path="res://shaders/viewershader.gdshader" id="4_nj1fv"]
+[ext_resource type="Shader" uid="uid://lf8sacgtcegv" path="res://shaders/finalshader.gdshader" id="5_0hde6"]
 [ext_resource type="FontFile" uid="uid://bssainh1x0f23" path="res://assets/fonts/Kenney Bold.ttf" id="6_aited"]
 [ext_resource type="Texture2D" uid="uid://og0f4dr36n8p" path="res://assets/save.png" id="6_dn6oy"]
 [ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="8_3e263"]
 [ext_resource type="Texture2D" uid="uid://dk5x3na5v3dim" path="res://assets/PickPackerLogo.png" id="8_y1m62"]
+[ext_resource type="PackedScene" uid="uid://cmj6ikkeeuxel" path="res://scenes/size_error_message.tscn" id="10_0hde6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8334s"]
-shader = ExtResource("4_nj1fv")
+shader = ExtResource("5_0hde6")
 
 [node name="PickPacker" type="Control"]
 layout_mode = 3
@@ -79,20 +79,24 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_pfikn")
-text = "Packed Image"
+text = "Packed Image:"
 horizontal_alignment = 1
 
-[node name="FinalTexture" type="TextureRect" parent="VBoxContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(450, 450)
 layout_mode = 2
-texture = ExtResource("3_pf12n")
-expand_mode = 2
 
-[node name="FinalImage" type="ColorRect" parent="VBoxContainer"]
-visible = false
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(450, 450)
+render_target_update_mode = 4
+
+[node name="FinalImage" type="ColorRect" parent="VBoxContainer/SubViewportContainer/SubViewport"]
 material = SubResource("ShaderMaterial_8334s")
 custom_minimum_size = Vector2(450, 450)
-layout_mode = 2
+offset_right = 450.0
+offset_bottom = 450.0
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -134,7 +138,7 @@ offset_bottom = 249.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("8_y1m62")
 
-[node name="Button" type="Button" parent="."]
+[node name="ResetButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -142,5 +146,19 @@ offset_right = 68.0
 offset_bottom = 68.0
 icon = ExtResource("8_3e263")
 
+[node name="SizeErrorMessage" parent="." instance=ExtResource("10_0hde6")]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 85.0
+offset_top = 15.0
+offset_right = 85.0
+offset_bottom = 15.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
