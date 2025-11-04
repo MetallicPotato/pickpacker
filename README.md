@@ -13,6 +13,10 @@ I've run across channel packing utilities before, but never found one that would
   </a>
 </p>
 
+## File Formats
+PickPacker currently supports PNG, JPG, SVG, and EXR imported files.
+It currently only exports to PNG.
+
 ## Version
 Built on Godot 4.5.1
 
