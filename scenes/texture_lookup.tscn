@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtyfu3dcxeuyk"]
+[gd_scene load_steps=10 format=3 uid="uid://dtyfu3dcxeuyk"]
 
 [ext_resource type="Script" uid="uid://bht56xxe2lq8j" path="res://scenes/texture_lookup.gd" id="1_1bex4"]
 [ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="2_cdpyl"]
 [ext_resource type="Texture2D" uid="uid://e45dwm1wysgy" path="res://assets/whitecolor.png" id="2_gs8x8"]
 [ext_resource type="Shader" uid="uid://b1pdcx12g8ocv" path="res://shaders/viewershader.gdshader" id="2_n3u38"]
 [ext_resource type="Texture2D" uid="uid://dpmdxgqb6gonr" path="res://assets/downarrow.png" id="3_n3rsr"]
+[ext_resource type="Texture2D" uid="uid://bgd2mx3v7rwxu" path="res://assets/import.png" id="4_f3tk4"]
+[ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="5_c228c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdpyl"]
 content_margin_left = 0.0
@@ -70,11 +72,21 @@ text = "Red Channel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
+[node name="ImportButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_cdpyl")
-text = "Open Image
+text = "
 "
+icon = ExtResource("4_f3tk4")
+icon_alignment = 1
+
+[node name="ResetButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_cdpyl")
+text = "
+"
+icon = ExtResource("5_c228c")
+icon_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer/VBox"]
 material = SubResource("ShaderMaterial_cdpyl")
@@ -88,8 +100,10 @@ expand_mode = 2
 title = "Open a File"
 file_mode = 0
 access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.JPG", "*.svg", "*.exr")
 use_native_dialog = true
 
 [connection signal="item_selected" from="PanelContainer/VBox/HBoxContainer/ChannelSelect" to="." method="_on_channel_select_item_selected"]
-[connection signal="pressed" from="PanelContainer/VBox/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBox/HBoxContainer/ImportButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBox/HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

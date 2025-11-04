@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bhhjitwjhhqa4"]
+[gd_scene load_steps=10 format=3 uid="uid://bhhjitwjhhqa4"]
 
 [ext_resource type="Script" uid="uid://bgw3g1xgsi416" path="res://scenes/pick_packer.gd" id="1_ch5a3"]
 [ext_resource type="PackedScene" uid="uid://dtyfu3dcxeuyk" path="res://scenes/texture_lookup.tscn" id="1_twk1d"]
 [ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="3_pfikn"]
 [ext_resource type="Shader" uid="uid://lf8sacgtcegv" path="res://shaders/finalshader.gdshader" id="5_0hde6"]
-[ext_resource type="FontFile" uid="uid://bssainh1x0f23" path="res://assets/fonts/Kenney Bold.ttf" id="6_aited"]
 [ext_resource type="Texture2D" uid="uid://og0f4dr36n8p" path="res://assets/save.png" id="6_dn6oy"]
 [ext_resource type="Texture2D" uid="uid://cjgfobyesyul0" path="res://assets/PickPackerIcon.png" id="7_plfn3"]
 [ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="8_3e263"]
@@ -82,21 +81,10 @@ theme_override_fonts/font = ExtResource("3_pfikn")
 text = "Packed Image:"
 horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(450, 450)
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(450, 450)
-render_target_update_mode = 4
-
-[node name="FinalImage" type="ColorRect" parent="VBoxContainer/SubViewportContainer/SubViewport"]
+[node name="FinalPreview" type="ColorRect" parent="VBoxContainer"]
 material = SubResource("ShaderMaterial_8334s")
 custom_minimum_size = Vector2(450, 450)
-offset_right = 450.0
-offset_bottom = 450.0
+layout_mode = 2
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -124,8 +112,8 @@ offset_top = 25.0
 offset_right = -25.0
 offset_bottom = 70.0
 grow_horizontal = 0
-theme_override_fonts/font = ExtResource("6_aited")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("3_pfikn")
+theme_override_font_sizes/font_size = 42
 text = "PickPacker"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -159,6 +147,18 @@ offset_right = 85.0
 offset_bottom = 15.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(40, 40)
+render_target_update_mode = 4
+
+[node name="FinalImage" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_8334s")
+custom_minimum_size = Vector2(450, 450)
+offset_right = 450.0
+offset_bottom = 450.0
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

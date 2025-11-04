@@ -15,6 +15,7 @@ enum channelselect {RED,GREEN,BLUE,ALPHA}
 @onready var panel_container: PanelContainer = $PanelContainer
 
 var channeltouse: int = 0 #0=Red, 1=Green, 2=Blue, 3=Alpha
+var image_set: bool = false
 
 func _ready() -> void:
 	var tooltipname: String
@@ -61,4 +62,14 @@ func _on_channel_select_item_selected(index: int) -> void:
 func load_image(path: String) -> void:
 	var image = Image.load_from_file(path)
 	texture_rect.texture = ImageTexture.create_from_image(image)
+	image_set = true
 	image_changed.emit(Channel)
+
+func reset_image() -> void:
+	var whiteimg = preload("res://assets/whitecolor.png")
+	texture_rect.texture = whiteimg
+	image_set = false
+	channel_select.select(0)
+
+func _on_reset_button_pressed() -> void:
+	reset_image()
