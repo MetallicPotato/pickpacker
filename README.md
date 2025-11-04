@@ -20,5 +20,8 @@ It currently only exports to PNG.
 ## Version
 Built on Godot 4.5.1
 
+## Credits
+Uses fonts and images from [Kenney](https://kenney.nl/assets)
+
 ## License
 This project is licensed under the terms of the [MIT license](https://github.com/MetallicPotato/pickpacker/blob/main/LICENSE)
