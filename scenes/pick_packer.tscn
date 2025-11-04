@@ -6,8 +6,8 @@
 [ext_resource type="Shader" uid="uid://lf8sacgtcegv" path="res://shaders/finalshader.gdshader" id="5_0hde6"]
 [ext_resource type="FontFile" uid="uid://bssainh1x0f23" path="res://assets/fonts/Kenney Bold.ttf" id="6_aited"]
 [ext_resource type="Texture2D" uid="uid://og0f4dr36n8p" path="res://assets/save.png" id="6_dn6oy"]
+[ext_resource type="Texture2D" uid="uid://cjgfobyesyul0" path="res://assets/PickPackerIcon.png" id="7_plfn3"]
 [ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="8_3e263"]
-[ext_resource type="Texture2D" uid="uid://dk5x3na5v3dim" path="res://assets/PickPackerLogo.png" id="8_y1m62"]
 [ext_resource type="PackedScene" uid="uid://cmj6ikkeeuxel" path="res://scenes/size_error_message.tscn" id="10_0hde6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8334s"]
@@ -137,7 +137,7 @@ offset_top = -7.0
 offset_right = 196.0
 offset_bottom = 249.0
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("8_y1m62")
+texture = ExtResource("7_plfn3")
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 0

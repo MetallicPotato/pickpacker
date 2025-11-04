@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk5x3na5v3dim"
-path="res://.godot/imported/PickPackerLogo.png-def199312204e93ffbdf90e94cf7695a.ctex"
+uid="uid://cjgfobyesyul0"
+path="res://.godot/imported/PickPackerIcon.png-bc9c5808bc59aef21294a31dd96cdb33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PickPackerLogo.png"
-dest_files=["res://.godot/imported/PickPackerLogo.png-def199312204e93ffbdf90e94cf7695a.ctex"]
+source_file="res://assets/PickPackerIcon.png"
+dest_files=["res://.godot/imported/PickPackerIcon.png-bc9c5808bc59aef21294a31dd96cdb33.ctex"]
 
 [params]
 

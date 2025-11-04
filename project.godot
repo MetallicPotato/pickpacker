@@ -11,10 +11,12 @@ config_version=5
 [application]
 
 config/name="PickPacker"
+config/version="1.1.0"
 run/main_scene="uid://bhhjitwjhhqa4"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/image="uid://dgjac2foya4li"
-config/icon="res://icon.svg"
+config/icon="uid://cjgfobyesyul0"
+config/windows_native_icon="res://assets/PickPackerIcon.ico"
 
 [rendering]
 
