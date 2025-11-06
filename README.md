@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="1280" alt="cover" src="https://github.com/MetallicPotato/pickpacker/blob/main/assets/PickPackerSplash.png">
+  <img width="1280" alt="cover" src="https://github.com/MetallicPotato/pickpacker/blob/main/assets/PickPackerSplash_2.png">
 </p>
 
 <h1 align="center">PickPacker</h1>
@@ -16,12 +16,12 @@ I've run across channel packing utilities before, but never found one that would
 ## What is channel packing?
 Channel packing is the act of storing black and white image data (such as a roughness/smoothness map, a metallic map, or a mask) in the color channels of an image, allowing you to store up to four black and white maps in one texture! This can help reduce the number of textures you need to store in your game, and improve your game's performance!
 
-## File Formats
-PickPacker currently supports PNG, JPG, SVG, and EXR imported files.
+## Formats
+PickPacker currently supports PNG, JPG, Bitmap (BMP), Scalable Vector Graphics (SVG), Targa (TGA), and WebP imported files.
 It currently only exports to PNG.
 
 ## Version
-Built on Godot 4.5.1
+Built on [Godot](https://godotengine.org/) 4.5.1
 
 ## Credits
 Uses fonts and images from [Kenney](https://kenney.nl/assets)

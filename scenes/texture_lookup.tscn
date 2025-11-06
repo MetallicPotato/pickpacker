@@ -1,28 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtyfu3dcxeuyk"]
+[gd_scene load_steps=11 format=3 uid="uid://dtyfu3dcxeuyk"]
 
 [ext_resource type="Script" uid="uid://bht56xxe2lq8j" path="res://scenes/texture_lookup.gd" id="1_1bex4"]
+[ext_resource type="StyleBox" uid="uid://cbe26fcrx0k7h" path="res://styles/transparent_panel.tres" id="2_2e10o"]
+[ext_resource type="FontFile" uid="uid://cu3me2auyfot7" path="res://assets/fonts/Kenney Future Square.ttf" id="2_c228c"]
 [ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="2_cdpyl"]
 [ext_resource type="Texture2D" uid="uid://e45dwm1wysgy" path="res://assets/whitecolor.png" id="2_gs8x8"]
 [ext_resource type="Shader" uid="uid://b1pdcx12g8ocv" path="res://shaders/viewershader.gdshader" id="2_n3u38"]
 [ext_resource type="Texture2D" uid="uid://dpmdxgqb6gonr" path="res://assets/downarrow.png" id="3_n3rsr"]
 [ext_resource type="Texture2D" uid="uid://bgd2mx3v7rwxu" path="res://assets/import.png" id="4_f3tk4"]
 [ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="5_c228c"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdpyl"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-corner_detail = 5
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cdpyl"]
 shader = ExtResource("2_n3u38")
@@ -40,7 +26,7 @@ script = ExtResource("1_1bex4")
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(325, 266)
 layout_mode = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_cdpyl")
+theme_override_styles/panel = ExtResource("2_2e10o")
 
 [node name="VBox" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -52,7 +38,8 @@ alignment = 1
 [node name="ChannelSelect" type="OptionButton" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Which color channel in the imported image to pack into the final image."
-theme_override_fonts/font = ExtResource("2_cdpyl")
+theme_override_fonts/font = ExtResource("2_c228c")
+theme_override_font_sizes/font_size = 24
 theme_override_icons/arrow = ExtResource("3_n3rsr")
 selected = 0
 item_count = 4
@@ -65,15 +52,24 @@ popup/item_2/id = 2
 popup/item_3/text = "A"
 popup/item_3/id = 3
 
+[node name="Spacer" type="Control" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Label" type="Label" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_cdpyl")
+theme_override_fonts/font = ExtResource("2_c228c")
 text = "Red Channel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Spacer2" type="Control" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="ImportButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/icon_max_width = 35
 theme_override_fonts/font = ExtResource("2_cdpyl")
 text = "
 "
@@ -82,6 +78,7 @@ icon_alignment = 1
 
 [node name="ResetButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
+theme_override_constants/icon_max_width = 35
 theme_override_fonts/font = ExtResource("2_cdpyl")
 text = "
 "
@@ -100,7 +97,7 @@ expand_mode = 2
 title = "Open a File"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.png", "*.jpg", "*.JPG", "*.svg", "*.exr")
+filters = PackedStringArray("*.png", "*.jpg", "*.JPG", "*.svg", "*.bmp", "*.tga", "*.webp")
 use_native_dialog = true
 
 [connection signal="item_selected" from="PanelContainer/VBox/HBoxContainer/ChannelSelect" to="." method="_on_channel_select_item_selected"]

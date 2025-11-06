@@ -46,7 +46,7 @@ func _check_image_size() -> void:
 	for thisnode in nodes:
 		for thisnodeagain in nodes:
 			if thisnode.texture_rect.texture.get_image().get_size() != thisnodeagain.texture_rect.texture.get_image().get_size():
-				if thisnodeagain.image_set:
+				if thisnodeagain.image_set and thisnode.image_set:
 					mismatch = true
 	if mismatch:
 		size_error_message.show()
@@ -98,4 +98,4 @@ func _on_reset_button_pressed():
 	changeimage(TextureLookup.channelselect.GREEN)
 	changeimage(TextureLookup.channelselect.BLUE)
 	changeimage(TextureLookup.channelselect.ALPHA)
-	size_error_message.hide()
+	_check_image_size()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://e187qtw1i6dg"
-path="res://.godot/imported/exclamation.png-3544f8e98dad6b4194bc1424964d5de5.ctex"
+uid="uid://duea38x48u6w0"
+path="res://.godot/imported/PickPackerSplash_2.png-7fd5ccc8dca7d3633b734c4ffa79fb9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fonts/exclamation.png"
-dest_files=["res://.godot/imported/exclamation.png-3544f8e98dad6b4194bc1424964d5de5.ctex"]
+source_file="res://assets/PickPackerSplash_2.png"
+dest_files=["res://.godot/imported/PickPackerSplash_2.png-7fd5ccc8dca7d3633b734c4ffa79fb9a.ctex"]
 
 [params]
 

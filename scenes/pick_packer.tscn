@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhhjitwjhhqa4"]
+[gd_scene load_steps=11 format=3 uid="uid://bhhjitwjhhqa4"]
 
 [ext_resource type="Script" uid="uid://bgw3g1xgsi416" path="res://scenes/pick_packer.gd" id="1_ch5a3"]
 [ext_resource type="PackedScene" uid="uid://dtyfu3dcxeuyk" path="res://scenes/texture_lookup.tscn" id="1_twk1d"]
-[ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="3_pfikn"]
+[ext_resource type="StyleBox" uid="uid://cbe26fcrx0k7h" path="res://styles/transparent_panel.tres" id="3_plfn3"]
 [ext_resource type="Shader" uid="uid://lf8sacgtcegv" path="res://shaders/finalshader.gdshader" id="5_0hde6"]
 [ext_resource type="Texture2D" uid="uid://og0f4dr36n8p" path="res://assets/save.png" id="6_dn6oy"]
+[ext_resource type="FontFile" uid="uid://cu3me2auyfot7" path="res://assets/fonts/Kenney Future Square.ttf" id="6_plfn3"]
 [ext_resource type="Texture2D" uid="uid://cjgfobyesyul0" path="res://assets/PickPackerIcon.png" id="7_plfn3"]
 [ext_resource type="Texture2D" uid="uid://3qvalxwnyvd0" path="res://assets/return.png" id="8_3e263"]
 [ext_resource type="PackedScene" uid="uid://cmj6ikkeeuxel" path="res://scenes/size_error_message.tscn" id="10_0hde6"]
@@ -58,38 +59,43 @@ Channel = 2
 layout_mode = 2
 Channel = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -470.0
-offset_top = -234.0
-offset_right = -20.0
-offset_bottom = 286.0
+offset_left = -477.0
+offset_top = -229.0
+offset_right = -27.0
+offset_bottom = 278.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("3_plfn3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_pfikn")
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_plfn3")
 text = "Packed Image:"
 horizontal_alignment = 1
 
-[node name="FinalPreview" type="ColorRect" parent="VBoxContainer"]
+[node name="FinalPreview" type="ColorRect" parent="PanelContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_8334s")
 custom_minimum_size = Vector2(450, 450)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_pfikn")
+theme_override_fonts/font = ExtResource("6_plfn3")
+theme_override_font_sizes/font_size = 20
 text = "Export
 "
 icon = ExtResource("6_dn6oy")
@@ -107,13 +113,13 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -201.0
-offset_top = 25.0
+offset_left = -345.0
+offset_top = 15.0
 offset_right = -25.0
-offset_bottom = 70.0
+offset_bottom = 77.0
 grow_horizontal = 0
-theme_override_fonts/font = ExtResource("3_pfikn")
-theme_override_font_sizes/font_size = 42
+theme_override_fonts/font = ExtResource("6_plfn3")
+theme_override_font_sizes/font_size = 54
 text = "PickPacker"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -121,18 +127,17 @@ vertical_alignment = 1
 [node name="TextureRect" type="TextureRect" parent="Label"]
 layout_mode = 0
 offset_left = -60.0
-offset_top = -7.0
 offset_right = 196.0
-offset_bottom = 249.0
+offset_bottom = 256.0
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("7_plfn3")
 
 [node name="ResetButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 68.0
-offset_bottom = 68.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 73.0
+offset_bottom = 73.0
 icon = ExtResource("8_3e263")
 
 [node name="SizeErrorMessage" parent="." instance=ExtResource("10_0hde6")]
@@ -160,6 +165,6 @@ custom_minimum_size = Vector2(450, 450)
 offset_right = 450.0
 offset_bottom = 450.0
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
