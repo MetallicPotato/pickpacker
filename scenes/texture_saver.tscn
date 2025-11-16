@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://chp601jyg2ttr"]
+
+[ext_resource type="Script" uid="uid://dcu8kh6gexr66" path="res://scenes/texture_saver.gd" id="1_udils"]
+[ext_resource type="StyleBox" uid="uid://cbe26fcrx0k7h" path="res://styles/transparent_panel.tres" id="2_8f7nr"]
+[ext_resource type="FontFile" uid="uid://0e0mkt2ft2rr" path="res://assets/fonts/Kenney Future.ttf" id="5_g6pft"]
+[ext_resource type="Texture2D" uid="uid://og0f4dr36n8p" path="res://assets/save.png" id="5_ldjnw"]
+[ext_resource type="Shader" uid="uid://b1pdcx12g8ocv" path="res://shaders/viewershader.gdshader" id="8_ubo5d"]
+[ext_resource type="Texture2D" uid="uid://e45dwm1wysgy" path="res://assets/whitecolor.png" id="9_i648p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cdpyl"]
+shader = ExtResource("8_ubo5d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udils"]
+shader = ExtResource("8_ubo5d")
+
+[node name="TextureSaver" type="Control"]
+custom_minimum_size = Vector2(360, 290)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_udils")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(325, 266)
+layout_mode = 0
+theme_override_styles/panel = ExtResource("2_8f7nr")
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBox"]
+material = SubResource("ShaderMaterial_cdpyl")
+instance_shader_parameters/mode = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("9_i648p")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="ChannelLabel" type="Label" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_g6pft")
+text = "Red Channel"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "Open an image from this PC."
+focus_mode = 0
+theme_override_constants/icon_max_width = 35
+theme_override_fonts/font = ExtResource("5_g6pft")
+text = "Export"
+icon = ExtResource("5_ldjnw")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+access = 2
+filters = PackedStringArray("*.png")
+use_native_dialog = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+render_target_update_mode = 0
+
+[node name="SaveTexture" type="TextureRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_udils")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_i648p")
+
+[connection signal="pressed" from="PanelContainer/VBox/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

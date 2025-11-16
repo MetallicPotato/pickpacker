@@ -38,6 +38,7 @@ alignment = 1
 [node name="ChannelSelect" type="OptionButton" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Which color channel in the imported image to pack into the final image."
+focus_mode = 0
 theme_override_fonts/font = ExtResource("2_c228c")
 theme_override_font_sizes/font_size = 24
 theme_override_icons/arrow = ExtResource("3_n3rsr")
@@ -70,6 +71,7 @@ size_flags_horizontal = 3
 [node name="ImportButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Open an image from this PC."
+focus_mode = 0
 theme_override_constants/icon_max_width = 35
 theme_override_fonts/font = ExtResource("2_cdpyl")
 text = "
@@ -80,6 +82,7 @@ icon_alignment = 1
 [node name="ResetButton" type="Button" parent="PanelContainer/VBox/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Reset and remove the image."
+focus_mode = 0
 theme_override_constants/icon_max_width = 35
 theme_override_fonts/font = ExtResource("2_cdpyl")
 text = "

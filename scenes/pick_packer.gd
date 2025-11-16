@@ -8,6 +8,7 @@ extends Control
 @onready var size_error_message = $SizeErrorMessage
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var final_image: ColorRect = $SubViewport/FinalImage
+var active: bool = false
 
 func _ready() -> void:
 	red.image_changed.connect(changeimage)
@@ -65,6 +66,7 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	saveimage.save_png(path)
 
 func _on_files_dropped(_files):
+	if not active: return
 	if red.panel_container.get_global_rect().has_point(get_global_mouse_position()):
 		red.load_image(_files[0])
 		return
@@ -99,3 +101,11 @@ func _on_reset_button_pressed():
 	changeimage(TextureLookup.channelselect.BLUE)
 	changeimage(TextureLookup.channelselect.ALPHA)
 	_check_image_size()
+
+func set_active(newactive: bool) -> void:
+	active = newactive
+	
+	if active:
+		sub_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	else:
+		sub_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED

@@ -41,7 +41,7 @@ stretch_mode = 3
 
 [node name="Label" type="Label" parent="PanelContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/paragraph_spacing = -17
+theme_override_constants/paragraph_spacing = -4
 theme_override_fonts/font = ExtResource("2_5tf27")
 text = "Several textures have different sizes!
 This can lead to unwanted results.
