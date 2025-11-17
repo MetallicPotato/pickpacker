@@ -38,11 +38,23 @@ offset_top = 15.0
 offset_right = -25.0
 offset_bottom = 77.0
 grow_horizontal = 0
+theme_override_colors/font_shadow_color = Color(0.7882353, 0.7882353, 0.7882353, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("1_2tj76")
 theme_override_font_sizes/font_size = 54
 text = "PickPacker"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Label"]
+modulate = Color(0.79, 0.79, 0.79, 0.2509804)
+layout_mode = 0
+offset_left = -58.0
+offset_top = 3.0
+offset_right = 198.0
+offset_bottom = 259.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_tsp2v")
 
 [node name="TextureRect" type="TextureRect" parent="Label"]
 layout_mode = 0

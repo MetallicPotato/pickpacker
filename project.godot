@@ -18,6 +18,10 @@ boot_splash/image="uid://dgjac2foya4li"
 config/icon="uid://cjgfobyesyul0"
 config/windows_native_icon="res://assets/PickPackerIcon.ico"
 
+[gui]
+
+theme/custom="uid://7eshovu2kn6c"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
